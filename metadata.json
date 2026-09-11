@@ -1,0 +1,6 @@
+{
+  "name": "Explore Gujarat",
+  "description": "Comprehensive Gujarat tourism guide featuring a Smart Trio Planner with custom duration & starting hubs, curated attractions, hotel recommendations, temple darshan timings, and coastal itineraries.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
