@@ -25,6 +25,7 @@ import { SavedTripModal } from './components/SavedTripModal';
 import { StartingHub, Attraction, DayPlan, UserProfile, CityPlace } from './types';
 import { ATTRACTIONS } from './data/gujaratData';
 import { CITIES_DATA, INITIAL_USER_PROFILE } from './data/citiesData';
+import { getRealPhotosForPlace } from './data/realPhotos';
 import { Sparkles, Phone, Mail, Globe, Shield, Heart } from 'lucide-react';
 
 export default function App() {
@@ -163,13 +164,20 @@ export default function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Convert CityPlace to Attraction for modal view
+  // Convert CityPlace to Attraction for modal view with guaranteed 6+ real pictures
   const handleSelectCityPlace = (place: CityPlace) => {
     const existingAtt = ATTRACTIONS.find(
       (a) => a.id === place.id || a.name.toLowerCase().includes(place.name.toLowerCase().slice(0, 8))
     );
+    const photos = (place.images && place.images.length >= 6)
+      ? place.images
+      : getRealPhotosForPlace(place.id, place.name, place.category, place.imageUrl);
+
     if (existingAtt) {
-      setSelectedAttraction(existingAtt);
+      setSelectedAttraction({
+        ...existingAtt,
+        images: existingAtt.images && existingAtt.images.length >= 6 ? existingAtt.images : photos,
+      });
     } else {
       setSelectedAttraction({
         id: place.id,
@@ -187,6 +195,7 @@ export default function App() {
         detailedDescription: `${place.description || place.name} Timings: ${place.timings || 'Daily'}. Entry: ${place.entryFee || 'Free'}.`,
         historicalSignificance: `Celebrated attraction in ${selectedCity?.name || 'Gujarat'} visited by thousands of travelers and devotees.`,
         imageUrl: place.imageUrl,
+        images: photos,
         highlights: place.tags || ['Historic Landmark', 'Gujarat Tourism'],
         insiderTips: [
           'Modest attire recommended for traditional and heritage places.',

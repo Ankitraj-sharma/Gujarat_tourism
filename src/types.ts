@@ -29,6 +29,7 @@ export interface Attraction {
   rating: number;
   reviewsCount: number;
   imageUrl: string;
+  images?: string[];
   isUnescoSite?: boolean;
   latitude: number;
   longitude: number;
@@ -177,6 +178,7 @@ export interface CityPlace {
   timings: string;
   entryFee: string;
   imageUrl: string;
+  images?: string[];
   tags: string[];
   navigationQuery: string;
   categories: string[];
@@ -193,6 +195,7 @@ export interface DestinationCity {
   tagline: string;
   subRegion: string;
   imageUrl: string;
+  images?: string[];
   weather: string;
   rating: number;
   reviews: string;

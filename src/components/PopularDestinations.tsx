@@ -13,7 +13,8 @@ import {
   Check, 
   Compass, 
   X,
-  Volume2
+  Volume2,
+  Camera
 } from 'lucide-react';
 import { CITIES_DATA } from '../data/citiesData';
 import { DestinationCity } from '../types';
@@ -200,9 +201,14 @@ export const PopularDestinations: React.FC<PopularDestinationsProps> = ({
                   <span className="px-2.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-orange-600/90 backdrop-blur-xs text-white shadow-xs">
                     {city.badge}
                   </span>
-                  <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-black/50 backdrop-blur-xs text-white">
-                    {city.placesCount} Places
-                  </span>
+                  <div className="flex items-center gap-1.5">
+                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/90 text-slate-950 backdrop-blur-xs flex items-center gap-1 shadow-xs">
+                      <Camera className="w-3 h-3" /> 6+ Photos
+                    </span>
+                    <span className="px-2 py-0.5 rounded-full text-[11px] font-semibold bg-black/50 backdrop-blur-xs text-white">
+                      {city.placesCount} Places
+                    </span>
+                  </div>
                 </div>
 
                 {/* Title inside bottom scrim for high-contrast mobile look */}
